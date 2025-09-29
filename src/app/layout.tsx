@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Work_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const workSans = Work_Sans({
+  variable: "--font-work-sans",
   subsets: ["latin"],
+  weight: "400",
 });
 
 const geistMono = Geist_Mono({
@@ -26,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${workSans.variable} ${geistMono.variable} antialiased`}
       >
         <Header />
         {children}

@@ -1,11 +1,28 @@
-import Image from 'next/image';
-import Link from 'next/link';
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { useState, useEffect } from "react";
 
 const Header = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsScrolled(scrollTop > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   return (
     <header
-      className="w-full bg-white shadow-md sticky top-0 z-50"
-      style={{ backgroundColor: "var(--color-white)" }}
+      className={`w-full sticky top-0 z-50 rounded-b-lg overflow-hidden transition-all duration-300 ${
+        isScrolled
+          ? "bg-white/80 backdrop-blur-md shadow-md"
+          : "bg-transparent shadow-none"
+      }`}
     >
       {/* Blue line at the top */}
       <div
