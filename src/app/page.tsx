@@ -1,6 +1,7 @@
 import ExpertiseSection from "@/components/sections/ExpertiseSection";
 import HeroSection from "@/components/sections/HeroSection";
 import ProjectSection from "@/components/sections/ProjectSection";
+import TestimonialSection from "@/components/sections/TestimonialSection";
 import TrustedBySection from "@/components/sections/TrustedBySection";
 import WhoWeServeSection from "@/components/sections/WhoWeServeSection";
 
@@ -12,6 +13,7 @@ export default function Home() {
       <WhoWeServeSection />
       <ExpertiseSection />
       <ProjectSection />
+      <TestimonialSection />
     </div>
   )
 }

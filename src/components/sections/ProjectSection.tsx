@@ -33,14 +33,15 @@ const ProjectSection = () => {
   return (
     <section className="py-20 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4" style={{ color: 'var(--color-primary)' }}>
-            Latest Projects
+          <h2 className="text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+            <span style={{ color: "var(--color-secondary)" }}>Latest</span>
+            <span className="text-gray-800"> projects</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            A glimpse into what we build - innovative solutions that drive results
+            A glimpse into what we build - innovative solutions that drive
+            results
           </p>
         </div>
 
@@ -50,7 +51,7 @@ const ProjectSection = () => {
             <div
               key={project.id}
               className={`flex flex-col lg:flex-row items-center gap-12 ${
-                index % 2 === 1 ? 'lg:flex-row-reverse' : ''
+                index % 2 === 1 ? "lg:flex-row-reverse" : ""
               }`}
             >
               {/* Project Image */}
@@ -71,7 +72,10 @@ const ProjectSection = () => {
               {/* Project Content */}
               <div className="flex-1 lg:flex-[0.45] text-center lg:text-left">
                 <div className="max-w-lg mx-auto lg:mx-0">
-                  <h3 className="text-3xl lg:text-4xl font-bold mb-6" style={{ color: 'var(--color-primary)' }}>
+                  <h3
+                    className="text-3xl lg:text-4xl font-bold mb-6"
+                    style={{ color: "var(--color-primary)" }}
+                  >
                     {project.title}
                   </h3>
 
@@ -89,7 +93,7 @@ const ProjectSection = () => {
                         <span
                           key={techIndex}
                           className="px-4 py-2 text-sm rounded-full text-white font-medium shadow-md"
-                          style={{ backgroundColor: 'var(--color-secondary)' }}
+                          style={{ backgroundColor: "var(--color-secondary)" }}
                         >
                           {tech}
                         </span>
@@ -102,7 +106,7 @@ const ProjectSection = () => {
                     href={project.link}
                     className="group/btn inline-flex items-center gap-3 px-8 py-4 rounded-xl font-semibold text-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
                     style={{
-                      backgroundColor: 'var(--color-primary)'
+                      backgroundColor: "var(--color-primary)",
                     }}
                   >
                     <span>View Project</span>
@@ -120,14 +124,13 @@ const ProjectSection = () => {
             href="/projects"
             className="group inline-flex items-center gap-3 px-8 py-4 rounded-xl font-semibold text-white transition-all duration-300 shadow-lg hover:shadow-xl"
             style={{
-              backgroundColor: 'var(--color-primary)'
+              backgroundColor: "var(--color-primary)",
             }}
           >
             <span>See All Projects</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
           </a>
         </div>
-
       </div>
     </section>
   );

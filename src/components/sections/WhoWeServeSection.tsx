@@ -30,11 +30,15 @@ const WhoWeServeSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-[var(--color-primary)] mb-4">
-            Solutions for Every Organization
+          <h2 className="text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+            <span style={{ color: "var(--color-secondary)" }}>
+              Solutions for every
+            </span>
+            <span className="text-gray-800"> organization</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Secure, scalable, and tailored software solutions—no matter your size or sector.
+            Secure, scalable, and tailored software solutions—no matter your
+            size or sector.
           </p>
         </div>
 
@@ -49,12 +53,12 @@ const WhoWeServeSection = () => {
               <div className="text-[var(--color-secondary)] mb-4">
                 {client.icon}
               </div>
-              
+
               {/* Title */}
               <h3 className="text-xl font-semibold text-gray-900 mb-3">
                 {client.title}
               </h3>
-              
+
               {/* Description */}
               <p className="text-gray-600 leading-relaxed">
                 {client.description}
@@ -62,8 +66,6 @@ const WhoWeServeSection = () => {
             </div>
           ))}
         </div>
-
-
       </div>
     </section>
   );

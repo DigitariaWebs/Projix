@@ -68,11 +68,9 @@ const ExpertiseSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2
-            className="text-4xl font-bold mb-4"
-            style={{ color: "var(--color-primary)" }}
-          >
-            Our Expertise
+          <h2 className="text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+            <span style={{ color: "var(--color-secondary)" }}>Our</span>
+            <span className="text-gray-800"> expertise</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             A dedicated team of experts delivering cutting-edge solutions across
@@ -177,7 +175,7 @@ const ExpertiseSection = () => {
               Ready to Work with Our Expert Team?
             </h3>
             <p className="text-lg mb-6 opacity-90">
-              Let's discuss how our expertise can help bring your vision to
+              Let&apos;s discuss how our expertise can help bring your vision to
               life.
             </p>
             <button
