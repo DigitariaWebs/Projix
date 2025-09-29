@@ -41,6 +41,18 @@ button:hover {
   cursor: pointer;
 }
 
+/* Custom Dropdown Option Styling */
+select option {
+  background-color: var(--color-white);
+  color: var(--color-primary);
+  padding: 8px 12px;
+}
+
+select option:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
 /* Logo Carousel Animation */
 @keyframes scroll {
   0% {
@@ -53,6 +65,7 @@ button:hover {
 }
 
 .animate-scroll {
-  animation: scroll 25s linear infinite;
+  animation: scroll 120s linear infinite;
   width: max-content;
+  -webkit-animation: scroll 120s linear infinite;
 }

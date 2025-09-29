@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { Filter, ExternalLink, Star, Calendar, Tag, Eye } from "lucide-react";
+import { Filter } from "lucide-react";
 import LogoCarousel from "@/components/ui/ProjectsLogoCarousel";
 
 const ProjectsPage = () => {
@@ -98,7 +98,7 @@ const ProjectsPage = () => {
       industry: "EDUCATION",
       type: "MOBILE APP",
       year: "2023",
-      featured: false,
+      featured: true,
       image: "/HeroSection.png",
       description:
         "Interactive learning platform with gamification, progress tracking, and AI-powered personalized learning paths.",
@@ -208,8 +208,8 @@ const ProjectsPage = () => {
                 className="text-xl leading-relaxed mb-12 max-w-3xl"
                 style={{ color: "var(--color-black)" }}
               >
-                It&#39;s time to prove that we&#39;re good at what we do. Check out our
-                case studies and browse the list of our projects below.
+                It&#39;s time to prove that we&#39;re good at what we do. Check
+                out our case studies and browse the list of our projects below.
               </p>
             </div>
           </div>
@@ -219,51 +219,59 @@ const ProjectsPage = () => {
       <LogoCarousel />
 
       {/* Filters */}
-      <section className="py-12 bg-white sticky top-0 z-10 border-b border-gray-200">
+      <section className="py-12 bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center gap-4 mb-8">
-            <div className="flex items-center gap-2 text-gray-600">
-              <Filter className="w-5 h-5" />
+          <div className="flex flex-wrap items-center justify-center gap-6">
+            <div
+              className="flex items-center gap-2"
+              style={{ color: "var(--color-primary)" }}
+            >
+              <Filter className="w-5 h-5 text-[var(--color-secondary)]" />
               <span className="font-semibold">FILTER BY</span>
             </div>
 
-            {/* Main Categories */}
-            <div className="flex flex-wrap gap-2">
-              {["ALL", "FEATURED", ...categories.slice(1)].map((filter) => (
-                <button
-                  key={filter}
-                  onClick={() => setActiveFilter(filter)}
-                  className={`px-6 py-2 rounded-full font-semibold transition-all duration-200 ${
-                    activeFilter === filter
-                      ? "text-white shadow-lg"
-                      : "text-gray-600 bg-gray-100 hover:bg-gray-200"
-                  }`}
-                  style={{
-                    backgroundColor:
-                      activeFilter === filter
-                        ? "var(--color-primary)"
-                        : undefined,
-                  }}
-                >
-                  {filter}
-                  {filter === "FEATURED" && (
-                    <Star className="w-4 h-4 ml-1 inline" />
-                  )}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Secondary Filters */}
-          <div className="flex flex-wrap gap-6 text-sm">
+            {/* Types Dropdown */}
             <div className="flex items-center gap-2">
-              <span className="font-semibold text-gray-600">INDUSTRIES:</span>
               <select
-                className="border border-gray-300 rounded-lg px-3 py-1 focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="border-b-2 bg-transparent px-2 py-2 font-semibold cursor-pointer focus:outline-none transition-all duration-300"
+                style={{
+                  borderColor: "var(--color-secondary)",
+                  color: "var(--color-primary)",
+                }}
+                value={activeFilter}
+                onChange={(e) => setActiveFilter(e.target.value)}
+              >
+                <option value="ALL">ALL TYPES</option>
+                <option value="FEATURED">FEATURED</option>
+                {categories.slice(1).map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Ampersand */}
+            <span
+              className="text-2xl font-bold"
+              style={{ color: "var(--color-secondary)" }}
+            >
+              &
+            </span>
+
+            {/* Industries Dropdown */}
+            <div className="flex items-center gap-2">
+              <select
+                className="border-b-2 bg-transparent px-2 py-2 font-semibold cursor-pointer focus:outline-none transition-all duration-300"
+                style={{
+                  borderColor: "var(--color-secondary)",
+                  color: "var(--color-primary)",
+                }}
                 value={activeCategory}
                 onChange={(e) => setActiveCategory(e.target.value)}
               >
-                {industries.map((industry) => (
+                <option value="ALL">ALL INDUSTRIES</option>
+                {industries.slice(1).map((industry) => (
                   <option key={industry} value={industry}>
                     {industry}
                   </option>
@@ -290,103 +298,28 @@ const ProjectsPage = () => {
                 </span>
               </h2>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+              <div
+                className="columns-2 gap-8 mb-16 space-y-8"
+                style={{ columnFill: "balance" }}
+              >
                 {filteredProjects
                   .filter((p) => p.featured)
-                  .map((project) => (
+                  .map((project, index) => (
                     <div
                       key={project.id}
-                      className="group relative overflow-hidden rounded-3xl bg-white shadow-xl hover:shadow-2xl transition-all duration-500 flex flex-col h-full"
+                      className={`group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 ${
+                        index % 2 === 0 ? "mt-12" : ""
+                      }`}
                     >
                       {/* Project Image */}
-                      <div className="relative h-80 overflow-hidden">
+                      <div className="relative h-[600px] overflow-hidden">
                         <Image
                           src={project.image}
                           alt={project.title}
                           fill
                           className="object-cover group-hover:scale-110 transition-transform duration-700"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-
-                        {/* Featured Badge */}
-                        <div className="absolute top-6 right-6">
-                          <div className="flex items-center gap-1 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1">
-                            <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                            <span className="text-white text-sm font-medium">
-                              Featured
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Project Meta */}
-                        <div className="absolute bottom-6 left-6 right-6">
-                          <div className="flex items-center gap-2 mb-3">
-                            <span className="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium">
-                              {project.category}
-                            </span>
-                            <span className="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium">
-                              {project.year}
-                            </span>
-                          </div>
-                          <h3 className="text-2xl font-bold text-white mb-2">
-                            {project.title}
-                          </h3>
-                          <p className="text-white/90 text-sm">
-                            {project.client}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Project Details */}
-                      <div className="p-8 flex flex-col flex-grow">
-                        <p className="text-gray-600 mb-6 leading-relaxed flex-grow">
-                          {project.description}
-                        </p>
-
-                        {/* Technologies */}
-                        <div className="flex flex-wrap gap-2 mb-6">
-                          {project.technologies.map((tech, index) => (
-                            <span
-                              key={index}
-                              className="px-3 py-1 text-xs rounded-full font-medium text-white"
-                              style={{
-                                backgroundColor: "var(--color-secondary)",
-                              }}
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-
-                        {/* Stats */}
-                        <div className="grid grid-cols-3 gap-4 mb-6">
-                          {Object.entries(project.stats).map(([key, value]) => (
-                            <div key={key} className="text-center">
-                              <div
-                                className="text-lg font-bold"
-                                style={{ color: "var(--color-primary)" }}
-                              >
-                                {value}
-                              </div>
-                              <div className="text-xs text-gray-500 uppercase">
-                                {key}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-
-                        {/* View Project Button */}
-                        <div className="mt-auto">
-                          <a
-                            href={project.link}
-                            className="group/btn w-full inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl font-semibold text-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
-                            style={{ backgroundColor: "var(--color-primary)" }}
-                          >
-                            <Eye className="w-5 h-5" />
-                            <span>View Case Study</span>
-                            <ExternalLink className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                          </a>
-                        </div>
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
                       </div>
                     </div>
                   ))}
@@ -401,79 +334,26 @@ const ProjectsPage = () => {
               <span className="text-gray-800"> PROJECTS</span>
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProjects.map((project) => (
+            <div
+              className="columns-2 gap-8 space-y-8"
+              style={{ columnFill: "balance" }}
+            >
+              {filteredProjects.map((project, index) => (
                 <div
                   key={project.id}
-                  className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col h-full"
+                  className={`group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 ${
+                    index % 2 === 0 ? "mt-12" : ""
+                  }`}
                 >
                   {/* Project Image */}
-                  <div className="relative h-48 overflow-hidden">
+                  <div className="relative h-96 overflow-hidden">
                     <Image
                       src={project.image}
                       alt={project.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
-
-                    {/* Project Type */}
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-medium">
-                        {project.type}
-                      </span>
-                    </div>
-
-                    {/* Year */}
-                    <div className="absolute top-4 right-4">
-                      <div className="flex items-center gap-1 bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-medium">
-                        <Calendar className="w-3 h-3" />
-                        {project.year}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Project Content */}
-                  <div className="p-6 flex flex-col flex-grow">
-                    <div className="flex items-center gap-2 mb-3">
-                      <Tag
-                        className="w-4 h-4"
-                        style={{ color: "var(--color-secondary)" }}
-                      />
-                      <span
-                        className="text-sm font-medium"
-                        style={{ color: "var(--color-secondary)" }}
-                      >
-                        {project.category}
-                      </span>
-                    </div>
-
-                    <h3
-                      className="text-xl font-bold mb-2"
-                      style={{ color: "var(--color-primary)" }}
-                    >
-                      {project.title}
-                    </h3>
-
-                    <p className="text-gray-600 text-sm mb-4 leading-relaxed flex-grow">
-                      {project.description}
-                    </p>
-
-                    <p className="text-sm text-gray-500 mb-4">
-                      {project.client}
-                    </p>
-
-                    {/* View Project Link */}
-                    <div className="mt-auto">
-                      <a
-                        href={project.link}
-                        className="group/link inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200"
-                        style={{ color: "var(--color-primary)" }}
-                      >
-                        <span>View Project</span>
-                        <ExternalLink className="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-200" />
-                      </a>
-                    </div>
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
                   </div>
                 </div>
               ))}
@@ -484,7 +364,7 @@ const ProjectsPage = () => {
           <div className="text-center mt-16">
             <button
               className="px-8 py-4 rounded-xl font-semibold text-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
-              style={{ backgroundColor: "var(--color-secondary)" }}
+              style={{ backgroundColor: "var(--color-primary)" }}
             >
               SHOW MORE PROJECTS
             </button>
