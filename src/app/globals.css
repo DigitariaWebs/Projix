@@ -16,7 +16,7 @@
   --color-accent: #00C896; /* teal accent for contrast */
 
   /* Background Colors */
-  --color-background: #e6f2ff;
+  --color-background: #e6f2ff76;
 
   /* Neutral Palette */
   --color-black: #000000;
@@ -32,7 +32,7 @@
 }
 
 body {
-  background-color: var(--color-background);
+  background-color: #f9fafb;
   color: var(--color-black);
   font-family: var(--font-work-sans), sans-serif;
 }

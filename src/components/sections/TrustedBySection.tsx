@@ -16,6 +16,11 @@ const TrustedBySection = () => {
       name: 'Desjardins',
       src: '/TrustedBySection/VilleDeTerrebonne.svg',
       alt: 'Ville de Terrebonne Logo'
+    },
+    {
+      name: 'Crustys',
+      src: '/TrustedBySection/Crustys.png',
+      alt: 'Crustys Logo'
     }
   ];
 
@@ -30,13 +35,13 @@ const TrustedBySection = () => {
                   src={logo.src}
                   alt={logo.alt}
                   width={400}
-                  height={80}
-                  className="max-h-20 w-auto object-contain filter grayscale"
+                  height={480}
+                  className="max-h-15 w-auto object-contain filter grayscale"
                 />
               </div>
               {/* Vertical line separator - hidden on last item and on mobile */}
               {index < trustedLogos.length - 1 && (
-                <div className="hidden md:block h-16 w-px bg-gray-300 mx-26"></div>
+                <div className="hidden md:block h-16 w-px bg-gray-300 mx-10"></div>
               )}
             </div>
           ))}
