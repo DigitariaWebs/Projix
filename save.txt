@@ -1,0 +1,406 @@
+"use client";
+
+import React, { useState } from 'react';
+import Image from 'next/image';
+import { ExternalLink, Calendar, Users, Clock, Filter } from 'lucide-react';
+
+const ProjectsPage = () => {
+  const [activeFilter, setActiveFilter] = useState('All');
+
+  const projects = [
+    {
+      id: 1,
+      title: "E-Commerce Platform",
+      description: "A comprehensive e-commerce solution featuring advanced analytics, seamless checkout experience, inventory management, and multi-vendor support. Built with modern technologies to handle high-traffic loads and provide exceptional user experience.",
+      detailedDescription: "This platform revolutionizes online retail with AI-powered recommendations, real-time inventory tracking, and integrated payment processing across multiple currencies.",
+      image: "/HeroSection.png",
+      technologies: ["React", "Node.js", "MongoDB", "Stripe", "AWS", "Redis"],
+      category: "Web Development",
+      duration: "6 months",
+      teamSize: "8 people",
+      year: "2024",
+      link: "/projects/ecommerce-platform",
+      featured: true
+    },
+    {
+      id: 2,
+      title: "Healthcare Management System",
+      description: "Comprehensive patient management system with telemedicine integration, electronic health records, appointment scheduling, and real-time monitoring capabilities.",
+      detailedDescription: "Streamlines healthcare operations with HIPAA-compliant data management, automated scheduling, and integrated telemedicine platform for remote consultations.",
+      image: "/HeroSection.png",
+      technologies: ["Vue.js", "Python", "PostgreSQL", "AWS", "Docker", "WebRTC"],
+      category: "Healthcare",
+      duration: "8 months",
+      teamSize: "12 people",
+      year: "2024",
+      link: "/projects/healthcare-system",
+      featured: true
+    },
+    {
+      id: 3,
+      title: "Financial Dashboard",
+      description: "Real-time financial analytics dashboard with predictive insights, portfolio management, and advanced data visualization for investment firms.",
+      detailedDescription: "Empowers financial professionals with real-time market data, risk analysis, and AI-driven investment recommendations.",
+      image: "/HeroSection.png",
+      technologies: ["React", "TypeScript", "D3.js", "Firebase", "Python", "TensorFlow"],
+      category: "Finance",
+      duration: "4 months",
+      teamSize: "6 people",
+      year: "2024",
+      link: "/projects/financial-dashboard",
+      featured: false
+    },
+    {
+      id: 4,
+      title: "Smart City IoT Platform",
+      description: "Integrated IoT platform for smart city management, including traffic monitoring, environmental sensors, and energy optimization systems.",
+      detailedDescription: "Connects thousands of IoT devices to optimize urban infrastructure, reduce energy consumption, and improve quality of life for citizens.",
+      image: "/HeroSection.png",
+      technologies: ["Angular", "Java", "Spring Boot", "Apache Kafka", "InfluxDB", "Kubernetes"],
+      category: "IoT",
+      duration: "12 months",
+      teamSize: "15 people",
+      year: "2023",
+      link: "/projects/smart-city-platform",
+      featured: true
+    },
+    {
+      id: 5,
+      title: "AI-Powered Learning Platform",
+      description: "Adaptive learning platform using machine learning to personalize educational content and track student progress in real-time.",
+      detailedDescription: "Transforms education with personalized learning paths, intelligent content recommendations, and comprehensive analytics for educators.",
+      image: "/HeroSection.png",
+      technologies: ["Next.js", "Python", "TensorFlow", "MongoDB", "Socket.io", "AWS"],
+      category: "Education",
+      duration: "10 months",
+      teamSize: "10 people",
+      year: "2023",
+      link: "/projects/ai-learning-platform",
+      featured: false
+    },
+    {
+      id: 6,
+      title: "Blockchain Supply Chain",
+      description: "Blockchain-based supply chain tracking system ensuring transparency and authenticity from manufacturer to consumer.",
+      detailedDescription: "Revolutionizes supply chain management with immutable tracking, smart contracts, and real-time visibility across the entire supply network.",
+      image: "/HeroSection.png",
+      technologies: ["React", "Solidity", "Ethereum", "Node.js", "IPFS", "Web3.js"],
+      category: "Blockchain",
+      duration: "7 months",
+      teamSize: "9 people",
+      year: "2023",
+      link: "/projects/blockchain-supply-chain",
+      featured: false
+    }
+  ];
+
+  const categories = ['All', 'Web Development', 'Healthcare', 'Finance', 'IoT', 'Education', 'Blockchain'];
+
+  const filteredProjects = activeFilter === 'All' 
+    ? projects 
+    : projects.filter(project => project.category === activeFilter);
+
+  const featuredProjects = projects.filter(project => project.featured);
+
+  return (
+    <div className="min-h-screen bg-white">
+      
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              <span style={{ color: 'var(--color-secondary)' }}>Our</span>
+              <span className="text-gray-800"> projects</span>
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+              Discover our portfolio of innovative solutions that have transformed businesses 
+              across industries. From startups to enterprises, we deliver excellence.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <div className="flex items-center gap-2 text-gray-600">
+                <Users className="w-5 h-5" style={{ color: 'var(--color-secondary)' }} />
+                <span>50+ Projects Delivered</span>
+              </div>
+              <div className="flex items-center gap-2 text-gray-600">
+                <Clock className="w-5 h-5" style={{ color: 'var(--color-secondary)' }} />
+                <span>99% On-Time Delivery</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Projects */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+              <span style={{ color: 'var(--color-secondary)' }}>Featured</span>
+              <span className="text-gray-800"> projects</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Showcase of our most impactful and innovative solutions
+            </p>
+          </div>
+
+          <div className="space-y-24">
+            {featuredProjects.map((project, index) => (
+              <div
+                key={project.id}
+                className={`flex flex-col lg:flex-row items-center gap-16 ${
+                  index % 2 === 1 ? 'lg:flex-row-reverse' : ''
+                }`}
+              >
+                {/* Project Image */}
+                <div className="flex-1 lg:flex-[0.55]">
+                  <div className="relative overflow-hidden rounded-2xl shadow-2xl group">
+                    <div className="relative h-96 lg:h-[500px]">
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                      
+                      {/* Project Category Badge */}
+                      <div className="absolute top-6 left-6">
+                        <span 
+                          className="px-4 py-2 rounded-full text-sm font-semibold text-white shadow-lg"
+                          style={{ backgroundColor: 'var(--color-secondary)' }}
+                        >
+                          {project.category}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Project Content */}
+                <div className="flex-1 lg:flex-[0.45] text-center lg:text-left">
+                  <div className="max-w-xl mx-auto lg:mx-0">
+                    <h3
+                      className="text-4xl lg:text-5xl font-bold mb-6"
+                      style={{ color: 'var(--color-primary)' }}
+                    >
+                      {project.title}
+                    </h3>
+
+                    <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                      {project.detailedDescription}
+                    </p>
+
+                    {/* Project Stats */}
+                    <div className="grid grid-cols-3 gap-4 mb-8">
+                      <div className="text-center lg:text-left">
+                        <div className="flex items-center gap-2 justify-center lg:justify-start mb-1">
+                          <Calendar className="w-4 h-4" style={{ color: 'var(--color-secondary)' }} />
+                          <span className="text-sm font-semibold text-gray-800">Duration</span>
+                        </div>
+                        <p className="text-sm text-gray-600">{project.duration}</p>
+                      </div>
+                      <div className="text-center lg:text-left">
+                        <div className="flex items-center gap-2 justify-center lg:justify-start mb-1">
+                          <Users className="w-4 h-4" style={{ color: 'var(--color-secondary)' }} />
+                          <span className="text-sm font-semibold text-gray-800">Team</span>
+                        </div>
+                        <p className="text-sm text-gray-600">{project.teamSize}</p>
+                      </div>
+                      <div className="text-center lg:text-left">
+                        <div className="flex items-center gap-2 justify-center lg:justify-start mb-1">
+                          <Clock className="w-4 h-4" style={{ color: 'var(--color-secondary)' }} />
+                          <span className="text-sm font-semibold text-gray-800">Year</span>
+                        </div>
+                        <p className="text-sm text-gray-600">{project.year}</p>
+                      </div>
+                    </div>
+
+                    {/* Technologies */}
+                    <div className="mb-8">
+                      <h4 className="text-sm font-semibold text-gray-800 mb-4 uppercase tracking-wider">
+                        Technologies Used
+                      </h4>
+                      <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
+                        {project.technologies.map((tech, techIndex) => (
+                          <span
+                            key={techIndex}
+                            className="px-4 py-2 text-sm rounded-full text-white font-medium shadow-md hover:shadow-lg transition-shadow duration-200"
+                            style={{ backgroundColor: 'var(--color-secondary)' }}
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* View Project Button */}
+                    <a
+                      href={project.link}
+                      className="group/btn inline-flex items-center gap-3 px-8 py-4 rounded-xl font-semibold text-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
+                      style={{ backgroundColor: 'var(--color-primary)' }}
+                    >
+                      <span>View Project Details</span>
+                      <ExternalLink className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* All Projects with Filter */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+              <span style={{ color: 'var(--color-secondary)' }}>All</span>
+              <span className="text-gray-800"> projects</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+              Browse our complete portfolio by category
+            </p>
+          </div>
+
+          {/* Filter Buttons */}
+          <div className="flex flex-wrap justify-center gap-4 mb-16">
+            <Filter className="w-5 h-5 text-gray-600 mr-2" />
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveFilter(category)}
+                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+                  activeFilter === category
+                    ? 'text-white shadow-lg'
+                    : 'text-gray-600 bg-white hover:bg-gray-100 shadow-md'
+                }`}
+                style={{
+                  backgroundColor: activeFilter === category ? 'var(--color-primary)' : undefined
+                }}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+
+          {/* Projects Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {filteredProjects.map((project) => (
+              <div
+                key={project.id}
+                className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
+              >
+                {/* Project Image */}
+                <div className="relative h-64 overflow-hidden">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300" />
+                  
+                  {/* Category Badge */}
+                  <div className="absolute top-4 left-4">
+                    <span 
+                      className="px-3 py-1 rounded-full text-xs font-semibold text-white"
+                      style={{ backgroundColor: 'var(--color-secondary)' }}
+                    >
+                      {project.category}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Project Content */}
+                <div className="p-8">
+                  <h3 
+                    className="text-2xl font-bold mb-4"
+                    style={{ color: 'var(--color-primary)' }}
+                  >
+                    {project.title}
+                  </h3>
+
+                  <p className="text-gray-600 mb-6 leading-relaxed">
+                    {project.description}
+                  </p>
+
+                  {/* Project Meta */}
+                  <div className="flex items-center gap-6 mb-6 text-sm text-gray-500">
+                    <div className="flex items-center gap-1">
+                      <Calendar className="w-4 h-4" />
+                      <span>{project.year}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Clock className="w-4 h-4" />
+                      <span>{project.duration}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Users className="w-4 h-4" />
+                      <span>{project.teamSize}</span>
+                    </div>
+                  </div>
+
+                  {/* Technologies */}
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.technologies.slice(0, 4).map((tech, index) => (
+                      <span
+                        key={index}
+                        className="px-3 py-1 text-xs rounded-full text-white font-medium"
+                        style={{ backgroundColor: 'var(--color-secondary)' }}
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                    {project.technologies.length > 4 && (
+                      <span className="px-3 py-1 text-xs rounded-full bg-gray-200 text-gray-600 font-medium">
+                        +{project.technologies.length - 4} more
+                      </span>
+                    )}
+                  </div>
+
+                  {/* View Project Button */}
+                  <a
+                    href={project.link}
+                    className="group/btn inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-300 border-2 hover:bg-opacity-10"
+                    style={{
+                      color: 'var(--color-primary)',
+                      borderColor: 'var(--color-primary)'
+                    }}
+                  >
+                    <span>View Project</span>
+                    <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA Section */}
+          <div className="text-center mt-20">
+            <h3 className="text-2xl font-bold mb-4" style={{ color: 'var(--color-primary)' }}>
+              Ready to Start Your Project?
+            </h3>
+            <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+              Let's discuss how we can bring your vision to life with our expertise and innovative approach.
+            </p>
+            <a
+              href="/contact"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl font-semibold text-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
+              style={{ backgroundColor: 'var(--color-primary)' }}
+            >
+              Start Your Project
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  );
+};
+
+export default ProjectsPage;
